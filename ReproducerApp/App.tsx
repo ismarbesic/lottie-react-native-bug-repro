@@ -1,20 +1,22 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import LottieView from 'lottie-react-native';
+import jsonAnimation from './Watermelon.json';
+import { useState } from 'react';
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [isJson, setIsJson] = useState(false);
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
+      <Text>Should show watermelon: {isJson.toString()}</Text>
+      <LottieView
+        source={isJson ? jsonAnimation : 'LottieLogo1'}
+        style={{ width: 100, height: 100 }}
+        autoPlay
+      />
+      <Pressable onPress={() => setIsJson(p => !p)}>
+        <Text>Toggle</Text>
+      </Pressable>
     </View>
   );
 }
@@ -22,6 +24,9 @@ function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
   },
 });
 
